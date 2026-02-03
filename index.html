@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dalu 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      background: linear-gradient(to bottom, #ffd6e8, #fff);
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 30px;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #d63384;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .teddy {
+      font-size: 90px;
+      display: inline-block;
+      position: relative;
+    }
+
+    /* Hugging animation */
+    @keyframes hugTogether {
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(-5px) rotate(-5deg); }
+      50% { transform: translateX(5px) rotate(5deg); }
+      75% { transform: translateX(-5px) rotate(-5deg); }
+      100% { transform: translateX(0) rotate(0deg); }
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #444;
+      margin-top: 20px;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    .hidden {
+      display: none;
+      margin-top: 30px;
+      font-size: 1.3em;
+      color: #c2185b;
+      padding: 0 20px;
+      min-height: 60px; /* Reserve space for typing */
+    }
+
+    .heart {
+      position: absolute;
+      color: pink;
+      font-size: 20px;
+      animation: float 6s infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Dear Dalu 💕</h1>
+
+  <div class="teddy" id="teddy">🧸🧸</div>
+
+  <p>
+    Thank you for being a wonderful big sister.<br>
+    Your love, care, and guidance mean more to me than words can say.
+  </p>
+
+  <button onclick="openGift()">OPEN 💖</button>
+
+  <div id="message" class="hidden"></div>
+
+  <!-- Background Music -->
+  <audio id="music">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const teddy = document.getElementById("teddy");
+    const messageDiv = document.getElementById("message");
+    const music = document.getElementById("music");
+    const messageText = "Thanks for being part of my growth.\nI wish to have you in my next life 🤍";
+
+    function openGift() {
+      music.play();
+
+      // Hugging animation
+      teddy.style.animation = "hugTogether 1s ease";
+      setTimeout(() => { teddy.style.animation = ""; }, 1000);
+
+      // Floating hearts
+      for (let i = 0; i < 20; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => { heart.remove(); }, 6000);
+      }
+
+      // Typing effect
+      messageDiv.style.display = "block";
+      messageDiv.innerHTML = ""; // reset
+      let index = 0;
+
+      function typeLetter() {
+        if (index < messageText.length) {
+          let char = messageText[index];
+          if (char === "\n") char = "<br>"; // handle line breaks
+          messageDiv.innerHTML += char;
+          index++;
+          setTimeout(typeLetter, 60); // typing speed in ms
+        }
+      }
+
+      typeLetter();
+    }
+  </script>
+
+</body>
+</html>
